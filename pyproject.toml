@@ -6,6 +6,7 @@ requires-python = ">=3.10"
 dependencies = [
     "pillow>=12.1.0",
     "pyexiv2>=2.15.5",
+    "send2trash>=2.1.0",
 ]
 
 [project.scripts]

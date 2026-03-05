@@ -42,6 +42,25 @@ def add_scale(fp: Path, fp_out: Path) -> Path:
 
     return fp_out
 
+def load_narrow_font(size: int) -> ImageFont.FreeTypeFont:
+    # try a narrow or code font installed on Linux
+    candidates = [
+        "Iosevka Term",
+        "Iosevka",
+        "Inconsolata-Regular.ttf",
+        "LiberationMono-Regular.ttf",
+        "NotoMono-Regular.ttf",
+    ]
+    for name in candidates:
+        try:
+            return ImageFont.truetype(name, size=size)
+        except OSError:
+            continue
+    # fallback
+    return ImageFont.load_default()
+
+
+
 
 def make_temp_scale(size: Tuple[int, int], pix_per_mm: float, label: str) -> Path:
     """Create a temporary scale image with black background, white line, and text."""
@@ -57,10 +76,7 @@ def make_temp_scale(size: Tuple[int, int], pix_per_mm: float, label: str) -> Pat
     draw = ImageDraw.Draw(img)
 
     # Define font
-    try:
-        font = ImageFont.truetype("arial.ttf", size=40)
-    except OSError:
-        font = ImageFont.load_default()  # type: ignore
+    font = load_narrow_font(size=40)
 
     # Draw scale line
     draw.line([(line_xpos, 23), (line_xpos - scale_length_px, 23)], fill=(255, 255, 255), width=6)
