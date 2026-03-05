@@ -58,13 +58,11 @@ sudo apt install libjpeg-turbo-progs
 ### Python
 
 ```bash
-pip install pillow pyexiv2
-```
-
-Then install microscale (editable recommended during development):
-
-```bash
-pip install -e .
+mkdir ~/dev
+cd ~/dev
+git clone https://github.com/ffsedd/microscale.git
+cd microscale
+uv tool install -e .
 ```
 
 ---
@@ -122,7 +120,7 @@ Operations will fail if:
 - JPEG sampling factors are incompatible
 - dimensions are not block‑aligned
 
-This is intentional.
+
 
 ---
 
@@ -147,16 +145,6 @@ pytest
 - JPEG only
 - requires `jpegtran`
 - assumes sane EXIF blocks (repairs thumbnails, not arbitrary corruption)
-
----
-
-## Philosophy
-
-- Explicit > implicit
-- Fail fast on unsafe transforms
-- Metadata is data — treat it carefully
-
-This tool is opinionated on purpose.
 
 ---
 
