@@ -59,7 +59,7 @@ def descale(fp: Path, fp_out: Path, scale_height: int = SCALE_HEIGHT) -> Path:
     crop_h = _round_down_block(new_h)
     crop_str = f"{w}x{crop_h}+0+0"
     run_jpegtran(["-crop", crop_str, "-outfile", str(fp_out), str(fp)])
-    logger.info("%s: Descale done -> %s", fp.name, fp_out.name)
+    logger.debug("%s: Descale done -> %s", fp.name, fp_out.name)
     return fp_out
 
 
@@ -78,7 +78,7 @@ def crop(fp: Path, fp_out: Path, target_ratio: float = TARGET_RATIO) -> Path:
 
     crop_str = _crop_geometry(w, h, target_ratio)
     run_jpegtran(["-crop", crop_str, "-outfile", str(fp_out), str(fp)])
-    logger.info("%s: Crop done -> %s", fp.name, fp_out.name)
+    logger.debug("%s: Crop done -> %s", fp.name, fp_out.name)
     return fp_out
 
 
@@ -87,5 +87,5 @@ def rotate(fp: Path) -> Path:
     Lossless rotate a JPEG image 180° in place.
     """
     run_jpegtran(["-rotate", "180", "-outfile", str(fp), str(fp)])
-    logger.info("%s: Rotation done", fp.name)
+    logger.debug("%s: Rotation done", fp.name)
     return fp

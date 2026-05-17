@@ -54,7 +54,7 @@ def concatenate(
 ) -> Path:
     """Concatenate two JPEG images vertically using jpegtran."""
 
-    logging.info(
+    logging.debug(
         "Concatenating images: %s + %s (metadata=%s)",
         fp.name,
         fp2.name,
@@ -103,5 +103,5 @@ def concatenate(
     finally:
         tmp_path.unlink(missing_ok=True)
 
-    logging.info("Concatenation done: %s", fp_out.name)
+    logging.debug("Concatenation done: %s", fp_out.name)
     return fp_out

@@ -28,6 +28,7 @@ def parse_args() -> argparse.Namespace:
 def process_and_trash(fp_ops: tuple[Path, Ops], trash: bool) -> None:
     fp, ops = fp_ops
     process_image(fp, ops)
+    logging.info(f"{fp.name} {ops}")
     if trash:
         send2trash(fp)
         logging.info(f"Moved original {fp} to trash")
